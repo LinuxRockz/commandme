@@ -30,11 +30,12 @@
 - `l` → View Changelog
 - `q` → Quit
 
+```
 
 ## 📥 Installation
 
 ### 1. Download the script
-```
+
 
 ```bash
 curl -L -o ~/.local/bin/commandme \
