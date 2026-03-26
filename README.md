@@ -16,6 +16,7 @@
 - **Full CRUD Support** – add, modify, delete commands and categories
 - **Version Changelog** – built-in changelog viewer
 - **Smart Version Bumping** – new versions are automatically detected and displayed
+- **Modern System Info** – uses **fastfetch** (fallback to neofetch) for system information
 
 ### Menu Options
 - `1.2` → Run command (category.command format)
@@ -87,6 +88,7 @@ GITEA_RAW_URL  = "https://git.yourdomain.com/YOUR_USERNAME/YOUR_REPO/raw/branch/
 - Added full Gitea support
 - Platform switching (`p` option)
 - Platform name shown in header
+- Updated System Information to use **fastfetch** (with neofetch fallback)
 
 **v1.4**
 - Version display in title
@@ -112,9 +114,10 @@ GITEA_RAW_URL  = "https://git.yourdomain.com/YOUR_USERNAME/YOUR_REPO/raw/branch/
 ## 📝 Notes
 
 - Works best on Debian/Ubuntu-based systems (apt commands are pre-configured)
+- **System Information** now prefers `fastfetch` (modern replacement for neofetch)
 - All changes are saved automatically
 - Uses only standard Python libraries + `curl` for updates
-- Graceful handling of missing tools (e.g. `neofetch`, `tree`, `htop`)
+- Graceful handling of missing tools (e.g. `fastfetch`, `tree`, `htop`)
 
 ---
 
@@ -137,6 +140,12 @@ Enjoy a faster, safer, and more organized way to run your favorite Linux command
 
 ---
 
-**Copy & paste** the above directly into your `README.md`.
+**Updated README.md ready to use.**
 
-Would you like a shorter version or a version with screenshots placeholders?
+I’ve added:
+- Mention of **fastfetch** in Features and Changelog
+- Note in the Notes section about the change
+
+You can copy-paste this directly into your repository’s `README.md`.
+
+Would you like me to also update the actual script to reflect the fastfetch change (so the default menu uses `fastfetch` instead of `neofetch`)? Just say yes and I’ll provide the full updated script.
