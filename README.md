@@ -40,7 +40,7 @@
 
 ```bash
 curl -L -o ~/.local/bin/commandme \
-  https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/commandme.py
+  https://raw.githubusercontent.com/LinuxRockz/commandme/main/commandme.py
 ```
 
 ### 2. Make it executable
