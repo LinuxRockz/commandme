@@ -32,7 +32,6 @@
 - `l` → View Changelog
 - `q` → Quit
 
----
 
 ## 📥 Installation
 
@@ -41,7 +40,7 @@
 ```bash
 curl -L -o ~/.local/bin/commandme \
   https://raw.githubusercontent.com/LinuxRockz/commandme/main/commandme.py
-  
+
 ```
 
 ### 2. Make it executable
