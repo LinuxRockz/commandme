@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-🚀 commandme - Linux Command Menu v1.6.4
-Your GitHub repo as default + Persistent RAW URL + Theming + fastfetch
+🚀 commandme - Linux Command Menu v1.6.5
+Default: Your GitHub repo + Persistent RAW URL + Theming + fastfetch
 """
 
 import json
@@ -19,7 +19,7 @@ CONFIG_FILE = Path.home() / ".linux_command_menu_config.json"
 SCRIPT_NAME = "commandme.py"
 SCRIPT_PATH = Path.home() / ".local/bin" / SCRIPT_NAME
 
-CURRENT_VERSION = "1.6.4"
+CURRENT_VERSION = "1.6.5"
 
 # ==================== THEMING ====================
 THEMES = {
@@ -162,10 +162,10 @@ def get_raw_url(config):
 
 # ====================== CHANGELOG ======================
 CHANGELOG = """
-v1.6.4 (2026-03-26)
-  • Default RAW URL set to your GitHub repo (LinuxRockz/commandme)
-  • Fixed 'p' (Switch Platform) option
-  • Persistent RAW URL via config
+v1.6.5 (2026-03-26)
+  • Fixed 'p' (Switch Platform) option in main loop
+  • Default RAW URL set to your GitHub repo
+  • Minor cleanup
 """
 
 
@@ -311,7 +311,6 @@ def load_menu():
                     return {"categories": {"General": data}}
         except:
             pass
-    # Default menu with fastfetch
     return {
         "categories": {
             "System Update & Maintenance": {
@@ -481,7 +480,7 @@ def print_main_menu(menu, config):
     print(f"  {colored('r', 'option')}            → Refresh menu")
     print(f"  {colored('u', 'option')}            → Check Updates")
     print(f"  {colored('t', 'option')}            → Toggle Auto-Update")
-    print(f"  {colored('p', 'option')}            → Switch Platform (GitHub/Gitea)")
+    print(f"  {colored('p', 'option')}            → Switch Platform")
     print(f"  {colored('h', 'option')}            → Change Theme")
     print(f"  {colored('s', 'option')}            → Set RAW URL")
     print(f"  {colored('l', 'option')}            → View Changelog")
@@ -531,32 +530,32 @@ def bash_aliases_submenu():
         print(colored("=" * 78, "header"))
         print(colored("🛠️  BASH ALIASES & SOURCED FILES".center(78), "info", bold=True))
         print(colored("=" * 78, "header"))
-        print(colored("Bash aliases submenu (ready)", "info"))
+        print(colored("Bash aliases submenu ready", "info"))
         input(colored("\nPress Enter to return...", "prompt"))
         return
 
 
-# ====================== CRUD (stub - you can expand later) ======================
+# ====================== CRUD (stub) ======================
 def add_item(menu):
-    print(colored("\nAdd command feature - expand when ready", "info"))
+    print(colored("\nAdd command - expand later", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def modify_item(menu):
-    print(colored("\nModify command feature - expand when ready", "info"))
+    print(colored("\nModify command - expand later", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def delete_item(menu):
-    print(colored("\nDelete feature - expand when ready", "info"))
+    print(colored("\nDelete - expand later", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def add_category(menu):
-    print(colored("\nAdd category feature - expand when ready", "info"))
+    print(colored("\nAdd category - expand later", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
@@ -580,7 +579,6 @@ def switch_platform(config):
     config["update_platform"] = new_platform
     save_config(config)
     print(colored(f"✅ Platform switched to {new_platform.upper()}", "success"))
-    print(colored("Use 's' to set the exact RAW URL if needed.", "info"))
     input(colored("\nPress Enter...", "prompt"))
 
 
@@ -658,8 +656,8 @@ def main():
             check_update_option(config)
         elif choice == "t":
             toggle_auto_update(config)
-        elif choice == "p":  # ← This line was missing before
-            switch_platform(config)
+        elif choice == "p":
+            switch_platform(config)  # ← FIXED
         elif choice == "h":
             change_theme(config)
         elif choice == "s":
