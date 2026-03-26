@@ -137,15 +137,3 @@ Enjoy a faster, safer, and more organized way to run your favorite Linux command
 
 *Star the repo if you find it useful!*
 ```
-
----
-
-**Updated README.md ready to use.**
-
-I’ve added:
-- Mention of **fastfetch** in Features and Changelog
-- Note in the Notes section about the change
-
-You can copy-paste this directly into your repository’s `README.md`.
-
-Would you like me to also update the actual script to reflect the fastfetch change (so the default menu uses `fastfetch` instead of `neofetch`)? Just say yes and I’ll provide the full updated script.
