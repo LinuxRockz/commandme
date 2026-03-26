@@ -3,8 +3,6 @@
 
 **A beautiful, colorized, self-updating Linux command menu with categories, auto-sudo prompts, bash aliases viewer, and support for both GitHub and Gitea.**
 
----
-
 ## ✨ Features
 
 - **Clean CLI Menu Interface** with categories and color highlighting
