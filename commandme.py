@@ -22,7 +22,7 @@ SCRIPT_PATH = Path.home() / ".local/bin" / SCRIPT_NAME
 # Update source
 UPDATE_PLATFORM = "github"  # "github" or "gitea"
 
-GITHUB_RAW_URL = "https://raw.githubusercontent.com/yourusername/linux-command-menu/main/commandme.py"
+GITHUB_RAW_URL = "https://raw.githubusercontent.com/LinuxRockz/commandme/refs/heads/main/commandme.py"
 GITEA_RAW_URL = "https://git.example.com/yourusername/linux-command-menu/raw/branch/main/commandme.py"
 
 CURRENT_VERSION = "1.6"  # Theming added
