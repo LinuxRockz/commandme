@@ -96,7 +96,7 @@ GITEA_RAW_URL  = "https://git.yourdomain.com/YOUR_USERNAME/YOUR_REPO/raw/branch/
 - Run the menu → press `h` → choose a theme number
 - Your choice is remembered across sessions
 
-**v1.5** (Latest)
+**v1.5**
 - Theming Added
 
 built-in themes: default, dark, light, matrix, solarized
