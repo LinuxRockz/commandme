@@ -84,6 +84,33 @@ GITEA_RAW_URL  = "https://git.yourdomain.com/YOUR_USERNAME/YOUR_REPO/raw/branch/
 
 ## 📋 Changelog
 
+**Theming Added in v1.6:**
+
+- **5 built-in themes**: `default`, `dark`, `light`, `matrix`, `solarized`
+- New option **`h`** → Change Theme
+- Theme choice is saved persistently
+- All colors now use the theming system (title, headers, commands, sudo tags, etc.)
+- Updated default "Quick System Info" to prefer **fastfetch** (with neofetch fallback)
+
+**How to use:**
+- Run the menu → press `h` → choose a theme number
+- Your choice is remembered across sessions
+
+**v1.5** (Latest)
+- Theming Added
+
+built-in themes: default, dark, light, matrix, solarized
+
+New option h → Change Theme
+Theme choice is saved persistently
+All colors now use the theming system (title, headers, commands, sudo tags, etc.)
+Updated default "Quick System Info" to prefer fastfetch (with neofetch fallback)
+
+How to use:
+
+Run the menu → press h → choose a theme number
+Your choice is remembered across sessions
+
 **v1.5** (Latest)
 - Added full Gitea support
 - Platform switching (`p` option)
