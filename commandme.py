@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 🚀 commandme - Linux Command Menu v1.6.5
-Default: Your GitHub repo + Persistent RAW URL + Theming + fastfetch
+Your GitHub repo default + Full Bash Aliases restored + Persistent RAW URL
 """
 
 import json
@@ -163,9 +163,9 @@ def get_raw_url(config):
 # ====================== CHANGELOG ======================
 CHANGELOG = """
 v1.6.5 (2026-03-26)
-  • Fixed 'p' (Switch Platform) option in main loop
+  • Restored full original Bash Aliases submenu
+  • Fixed 'p' (Switch Platform)
   • Default RAW URL set to your GitHub repo
-  • Minor cleanup
 """
 
 
@@ -523,39 +523,121 @@ def run_command(command):
     input(colored("\nPress Enter to continue...", "prompt"))
 
 
-# ====================== BASH ALIASES ======================
+# ====================== FULL BASH ALIASES SUBMENU (RESTORED) ======================
+def get_bash_files():
+    home = Path.home()
+    bash_files = []
+    bashrc = home / ".bashrc"
+    if bashrc.exists():
+        bash_files.append(("~/.bashrc", bashrc))
+    for file in sorted(home.glob(".*_bash")):
+        if file.is_file():
+            bash_files.append((f"~/{file.name}", file))
+    return bash_files
+
+
+def view_file(file_path: Path):
+    try:
+        print(colored(f"\n📄 Content of {file_path}", "info", bold=True))
+        print(colored("=" * 80, "header"))
+        with open(file_path, "r", encoding="utf-8") as f:
+            print(f.read())
+        print(colored("=" * 80, "header"))
+    except Exception as e:
+        print(colored(f"❌ Error reading file: {e}", "error"))
+
+
+def open_in_editor(file_path: Path):
+    editor = os.environ.get("EDITOR", "nano")
+    try:
+        subprocess.run([editor, str(file_path)])
+        print(colored(f"✅ Opened {file_path.name} in {editor}", "success"))
+    except Exception as e:
+        print(colored(f"❌ Failed to open editor: {e}", "error"))
+
+
+def source_file(file_path: Path):
+    print(colored(f"\nTo source this file, run in your terminal:", "warning"))
+    print(colored(f"   source '{file_path}'", "success", bold=True))
+    input(colored("\nPress Enter to continue...", "prompt"))
+
+
 def bash_aliases_submenu():
     while True:
         clear_screen()
         print(colored("=" * 78, "header"))
         print(colored("🛠️  BASH ALIASES & SOURCED FILES".center(78), "info", bold=True))
         print(colored("=" * 78, "header"))
-        print(colored("Bash aliases submenu ready", "info"))
-        input(colored("\nPress Enter to return...", "prompt"))
-        return
+
+        bash_files = get_bash_files()
+        if not bash_files:
+            print(colored("No .bashrc or .*_bash files found.", "warning"))
+            input(colored("\nPress Enter...", "prompt"))
+            return
+
+        for i, (name, path) in enumerate(bash_files, 1):
+            size = path.stat().st_size // 1024
+            print(
+                f"  {colored(str(i), 'command_id', bold=True):>2}. {colored(name, 'info')}   {colored(f'({size} KB)', 'header')}"
+            )
+
+        print(colored("\nOptions:", "info"))
+        print("  [number]     → View content")
+        print("  e [number]   → Edit in editor")
+        print("  s [number]   → Show source command")
+        print("  b            → Back to main menu")
+
+        choice = input(colored("\nEnter choice: ", "prompt")).strip().lower()
+
+        if choice == "b":
+            return
+        elif choice.startswith("e "):
+            try:
+                idx = int(choice[2:]) - 1
+                if 0 <= idx < len(bash_files):
+                    open_in_editor(bash_files[idx][1])
+            except:
+                print(colored("❌ Invalid number!", "error"))
+        elif choice.startswith("s "):
+            try:
+                idx = int(choice[2:]) - 1
+                if 0 <= idx < len(bash_files):
+                    source_file(bash_files[idx][1])
+            except:
+                print(colored("❌ Invalid number!", "error"))
+        elif choice.isdigit():
+            try:
+                idx = int(choice) - 1
+                if 0 <= idx < len(bash_files):
+                    view_file(bash_files[idx][1])
+                    input(colored("\nPress Enter to continue...", "prompt"))
+            except:
+                print(colored("❌ Invalid number!", "error"))
+        else:
+            print(colored("❌ Invalid option!", "error"))
 
 
-# ====================== CRUD (stub) ======================
+# ====================== CRUD (stub for now) ======================
 def add_item(menu):
-    print(colored("\nAdd command - expand later", "info"))
+    print(colored("\nAdd command feature (expand later)", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def modify_item(menu):
-    print(colored("\nModify command - expand later", "info"))
+    print(colored("\nModify command feature (expand later)", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def delete_item(menu):
-    print(colored("\nDelete - expand later", "info"))
+    print(colored("\nDelete feature (expand later)", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def add_category(menu):
-    print(colored("\nAdd category - expand later", "info"))
+    print(colored("\nAdd category feature (expand later)", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
@@ -657,7 +739,7 @@ def main():
         elif choice == "t":
             toggle_auto_update(config)
         elif choice == "p":
-            switch_platform(config)  # ← FIXED
+            switch_platform(config)
         elif choice == "h":
             change_theme(config)
         elif choice == "s":
