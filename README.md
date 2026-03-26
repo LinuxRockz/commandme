@@ -84,7 +84,7 @@ GITEA_RAW_URL  = "https://git.yourdomain.com/YOUR_USERNAME/YOUR_REPO/raw/branch/
 
 ## 📋 Changelog
 
-**Theming Added in v1.6:**
+**Theming Added in v1.6:**  (Latest)
 
 - **5 built-in themes**: `default`, `dark`, `light`, `matrix`, `solarized`
 - New option **`h`** → Change Theme
