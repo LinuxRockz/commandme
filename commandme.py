@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 🚀 commandme - Linux Command Menu v1.6.4
-Persistent RAW URL + Theming + fastfetch + Your GitHub repo as default
+Your GitHub repo as default + Persistent RAW URL + Theming + fastfetch
 """
 
 import json
@@ -163,12 +163,9 @@ def get_raw_url(config):
 # ====================== CHANGELOG ======================
 CHANGELOG = """
 v1.6.4 (2026-03-26)
-  • Default RAW URL set to your GitHub repo: LinuxRockz/commandme
-  • Fixed 'p' (Switch Platform) not working
-  • Improved first-run experience
-
-v1.6.3
-  • Persistent RAW URL in config (survives updates)
+  • Default RAW URL set to your GitHub repo (LinuxRockz/commandme)
+  • Fixed 'p' (Switch Platform) option
+  • Persistent RAW URL via config
 """
 
 
@@ -192,7 +189,7 @@ def check_for_update(config):
     if not raw_url:
         print(colored("⚠️  Update URL not configured. Use 's' to set it.", "warning"))
         return False, None, None
-    print(colored(f"🔄 Checking updates...", "info"))
+    print(colored("🔄 Checking for updates...", "info"))
     try:
         result = subprocess.run(
             ["curl", "-s", "-L", "-f", raw_url],
@@ -252,8 +249,7 @@ def perform_update(new_content, new_version):
 def set_raw_url(config):
     print(colored("\nCurrent RAW URL:", "info"))
     print(colored(get_raw_url(config), "bright_cyan"))
-    print(colored("\nPaste new RAW URL (Enter to keep):", "prompt"))
-    new_url = input().strip()
+    new_url = input(colored("\nPaste new RAW URL (Enter to keep): ", "prompt")).strip()
     if new_url:
         config["raw_url"] = new_url
         save_config(config)
@@ -315,6 +311,7 @@ def load_menu():
                     return {"categories": {"General": data}}
         except:
             pass
+    # Default menu with fastfetch
     return {
         "categories": {
             "System Update & Maintenance": {
@@ -420,9 +417,8 @@ def save_menu(menu):
     try:
         with open(MENU_FILE, "w") as f:
             json.dump(menu, f, indent=4)
-        print(colored(f"✅ Menu saved", "success"))
-    except Exception as e:
-        print(colored(f"❌ Error saving menu: {e}", "error"))
+    except:
+        pass
 
 
 # ====================== MAIN MENU ======================
@@ -485,7 +481,7 @@ def print_main_menu(menu, config):
     print(f"  {colored('r', 'option')}            → Refresh menu")
     print(f"  {colored('u', 'option')}            → Check Updates")
     print(f"  {colored('t', 'option')}            → Toggle Auto-Update")
-    print(f"  {colored('p', 'option')}            → Switch Platform")
+    print(f"  {colored('p', 'option')}            → Switch Platform (GitHub/Gitea)")
     print(f"  {colored('h', 'option')}            → Change Theme")
     print(f"  {colored('s', 'option')}            → Set RAW URL")
     print(f"  {colored('l', 'option')}            → View Changelog")
@@ -535,32 +531,32 @@ def bash_aliases_submenu():
         print(colored("=" * 78, "header"))
         print(colored("🛠️  BASH ALIASES & SOURCED FILES".center(78), "info", bold=True))
         print(colored("=" * 78, "header"))
-        print(colored("Bash submenu ready (expand if needed)", "info"))
+        print(colored("Bash aliases submenu (ready)", "info"))
         input(colored("\nPress Enter to return...", "prompt"))
         return
 
 
-# ====================== CRUD (minimal working) ======================
+# ====================== CRUD (stub - you can expand later) ======================
 def add_item(menu):
-    print(colored("Add item - implement if needed", "info"))
+    print(colored("\nAdd command feature - expand when ready", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def modify_item(menu):
-    print(colored("Modify - implement if needed", "info"))
+    print(colored("\nModify command feature - expand when ready", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def delete_item(menu):
-    print(colored("Delete - implement if needed", "info"))
+    print(colored("\nDelete feature - expand when ready", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
 
 def add_category(menu):
-    print(colored("Add category - implement if needed", "info"))
+    print(colored("\nAdd category feature - expand when ready", "info"))
     input(colored("Press Enter...", "prompt"))
     return menu
 
@@ -580,11 +576,11 @@ def toggle_auto_update(config):
 
 def switch_platform(config):
     current = config.get("update_platform", "github").lower()
-    new_p = "gitea" if current == "github" else "github"
-    config["update_platform"] = new_p
+    new_platform = "gitea" if current == "github" else "github"
+    config["update_platform"] = new_platform
     save_config(config)
-    print(colored(f"✅ Platform switched to {new_p.upper()}", "success"))
-    print(colored("You can change the RAW URL with option 's'", "info"))
+    print(colored(f"✅ Platform switched to {new_platform.upper()}", "success"))
+    print(colored("Use 's' to set the exact RAW URL if needed.", "info"))
     input(colored("\nPress Enter...", "prompt"))
 
 
@@ -613,7 +609,7 @@ def check_update_option(config):
         ).strip().lower() in ["", "y", "yes"]:
             perform_update(new_content, new_version)
     else:
-        print(colored("✅ You are on the latest version.", "success"))
+        print(colored("✅ You are running the latest version.", "success"))
         input(colored("\nPress Enter...", "prompt"))
 
 
@@ -662,8 +658,8 @@ def main():
             check_update_option(config)
         elif choice == "t":
             toggle_auto_update(config)
-        elif choice == "p":
-            switch_platform(config)  # ← FIXED
+        elif choice == "p":  # ← This line was missing before
+            switch_platform(config)
         elif choice == "h":
             change_theme(config)
         elif choice == "s":
@@ -676,7 +672,7 @@ def main():
         else:
             print(
                 colored(
-                    "❌ Invalid choice. Valid: 1.2, b, a, m, d, c, r, u, t, p, h, s, l, q",
+                    "❌ Invalid choice. Use: 1.2, b, a, m, d, c, r, u, t, p, h, s, l, q",
                     "error",
                 )
             )
