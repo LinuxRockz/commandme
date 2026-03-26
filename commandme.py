@@ -194,7 +194,7 @@ def load_menu():
                 "3": {"name": "Update Flatpak", "command": "flatpak update -y"}
             },
             "System Information": {
-                "1": {"name": "Quick System Info", "command": "neofetch || uname -a && cat /etc/os-release"},
+                "1": {"name": "Quick System Info", "command": "fastfetch || uname -a && cat /etc/os-release"},
                 "2": {"name": "Disk Usage (Human)", "command": "df -h"},
                 "3": {"name": "Memory Usage", "command": "free -h"},
                 "4": {"name": "CPU & Load", "command": "uptime && cat /proc/loadavg"}
