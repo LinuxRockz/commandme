@@ -66,6 +66,9 @@ commandme
 
 ## 📋 Changelog
 
+**v2.3.1**
+Added the missing show_version() function back
+
 **v2.3.0**
 Adding Themes back in
 
