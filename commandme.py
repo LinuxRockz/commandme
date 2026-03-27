@@ -285,7 +285,9 @@ def switch_shell_mode(config):
             input(colored("Press Enter...", "prompt"))
             return
         save_config(config)
-        print(colored(f"✅ Shell mode set to {config['shell_mode'].upper()}", "success"))
+        print(
+            colored(f"✅ Shell mode set to {config['shell_mode'].upper()}", "success")
+        )
     except:
         print(colored("Invalid choice.", "error"))
     input(colored("\nPress Enter...", "prompt"))
@@ -458,7 +460,7 @@ def view_file(file_path: Path):
 
 
 def source_file(file_path: Path):
-    print(colored(f"\nTo source this file, run:", "warning"))
+    print(colored("\nTo source this file, run:", "warning"))
     print(colored(f"   source '{file_path}'", "success", bold=True))
     input(colored("\nPress Enter to continue...", "prompt"))
 
