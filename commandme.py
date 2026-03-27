@@ -26,9 +26,7 @@ MENU_FILE = Path.home() / ".linux_command_menu.json"
 # 6. Click the "Raw" button on the file
 # 7. Copy the URL from browser (it starts with https://gist.githubusercontent.com/)
 # 8. Paste it below, replacing the placeholder
-GIST_RAW_URL = (
-    "https://gist.githubusercontent.com/YOUR_USERNAME/YOUR_GIST_ID/raw/commandme.py"
-)
+GIST_RAW_URL = "https://gist.githubusercontent.com/LinuxRockz/943cfd94340f8b8289edfbdda5f227c6/raw/b18daadcf1d4344ac435789ed110cd9657153167/commandme.py"
 
 # ANSI Colors
 C = {
