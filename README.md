@@ -84,6 +84,9 @@ GITEA_RAW_URL  = "https://git.yourdomain.com/YOUR_USERNAME/YOUR_REPO/raw/branch/
 
 ## 📋 Changelog
 
+**v1.6.7**
+Fixed editor flashing + Zsh/Bash support + Your GitHub default
+
 **v1.6.5**
 - Fully fixed 'p' (Switch Platform) option
 
