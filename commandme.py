@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-🚀 LINUX COMMAND MENU - v2.3.1
-Fixed: show_version() missing after update + Themes restored
+🚀 LINUX COMMAND MENU - v2.3.2
+Fixed + Themes with Live Preview
 """
 
 import json
@@ -12,15 +12,12 @@ from pathlib import Path
 from datetime import datetime
 
 # ==================== CONFIG ====================
-VERSION = "2.3.1"
+VERSION = "2.3.2"
 MENU_FILE = Path.home() / ".linux_command_menu.json"
 THEME_FILE = Path.home() / ".linux_command_menu_theme.json"
 
 # ==================== SELF-UPDATER CONFIG ====================
-# Replace with your own public Gist Raw URL after creating it
-GIST_RAW_URL = (
-    "https://gist.githubusercontent.com/LinuxRockz/943cfd94340f8b8289edfbdda5f227c6/raw/6a01880e1701962fca1c0481716578348a006ee7/commandme.py"
-)
+GIST_RAW_URL = "https://gist.githubusercontent.com/LinuxRockz/943cfd94340f8b8289edfbdda5f227c6/raw/b18daadcf1d4344ac435789ed110cd9657153167/commandme.py"
 
 # ==================== THEMES ====================
 AVAILABLE_THEMES = {
@@ -86,7 +83,6 @@ AVAILABLE_THEMES = {
     },
 }
 
-# ANSI Colors
 C = {
     "reset": "\033[0m",
     "bold": "\033[1m",
@@ -149,6 +145,31 @@ def clear_screen():
     os.system("clear" if os.name == "posix" else "cls")
 
 
+# ====================== THEME PREVIEW ======================
+def show_theme_preview(theme_key):
+    theme = AVAILABLE_THEMES[theme_key]
+    print(colored("\n" + "═" * 60, "header"))
+    print(colored("   THEME PREVIEW".center(60), "bright_yellow", bold=True))
+    print(colored("═" * 60, "header"))
+
+    print(colored("   🚀 LINUX COMMAND MENU", "header", bold=True))
+    print(colored(f"   Sample Category", "category", bold=True))
+    print(colored("   ──────────────────────────────────────────────────────", "blue"))
+    print(
+        f"       {colored('1', 'id', bold=True)}  {colored('Sample Command Name', 'name'):<30} → {colored('ls -lah --color=auto', 'command')}"
+    )
+    print(
+        f"       {colored('2', 'id', bold=True)}  {colored('Another Example', 'name'):<30} → {colored('htop || top', 'command')}"
+    )
+
+    print(colored("\n   Extra Options:", "extra"))
+    print(f"     {colored('s', 'prompt')} → Shell Aliases")
+    print(f"     {colored('t', 'prompt')} → Change Theme")
+    print(f"     {colored('u', 'prompt')} → Self Update")
+    print(colored("═" * 60, "header"))
+    print(colored(f"   Current theme: {theme['name']}", "bright_green"))
+
+
 # ====================== SELF-UPDATER ======================
 def self_update():
     clear_screen()
@@ -157,13 +178,8 @@ def self_update():
     print(colored("═" * 78, "header"))
 
     if "YOUR_USERNAME" in GIST_RAW_URL:
-        print(colored("❌ GIST_RAW_URL not configured yet!", "red"))
-        print(
-            colored(
-                "Please create a public Gist and update the URL in the script.",
-                "yellow",
-            )
-        )
+        print(colored("❌ GIST_RAW_URL not configured!", "red"))
+        print(colored("Create a public Gist and update the URL.", "yellow"))
         input(colored("\nPress Enter...", "prompt"))
         return
 
@@ -171,7 +187,7 @@ def self_update():
     try:
         import requests
     except ImportError:
-        print(colored("→ Installing requests (one-time)...", "yellow"))
+        print(colored("→ Installing requests...", "yellow"))
         subprocess.run(
             [sys.executable, "-m", "pip", "install", "requests"],
             check=True,
@@ -195,12 +211,12 @@ def self_update():
             break
 
     if new_ver == VERSION:
-        print(colored(f"✅ You are on the latest version (v{VERSION})", "bright_green"))
+        print(colored(f"✅ Already on latest (v{VERSION})", "bright_green"))
         input(colored("\nPress Enter...", "prompt"))
         return
 
-    print(colored(f"\nNew version found: v{new_ver}", "bright_green"))
-    if input(colored("Update now? (y/N): ", "prompt")).strip().lower() != "y":
+    print(colored(f"\nNew version: v{new_ver} (current v{VERSION})", "bright_green"))
+    if input(colored("Update? (y/N): ", "prompt")).strip().lower() != "y":
         return
 
     script_path = Path(sys.argv[0]).resolve()
@@ -208,12 +224,12 @@ def self_update():
     backup.write_text(script_path.read_text(encoding="utf-8"), encoding="utf-8")
 
     script_path.write_text(new_code, encoding="utf-8")
-    print(colored(f"🎉 Successfully updated to v{new_ver}!", "bright_green"))
-    print(colored("Please restart the script.", "cyan"))
+    print(colored(f"🎉 Updated to v{new_ver}!", "bright_green"))
+    print(colored("Restart the script.", "cyan"))
     input(colored("\nPress Enter...", "prompt"))
 
 
-# ====================== Shell Aliases Submenu ======================
+# ====================== Shell Aliases Submenu (unchanged) ======================
 def detect_current_shell():
     shell_path = os.environ.get("SHELL", "/bin/bash").lower()
     if "zsh" in shell_path:
@@ -359,7 +375,7 @@ def shell_aliases_submenu():
                     print(colored("   ❌ Invalid number", "red"))
 
 
-# ====================== Themes Submenu ======================
+# ====================== Themes Submenu with Live Preview ======================
 def themes_submenu():
     while True:
         clear_screen()
@@ -367,7 +383,7 @@ def themes_submenu():
         print(colored("🎨 THEMES".center(78), "bright_yellow", bold=True))
         print(colored("═" * 78, "header"))
         print(
-            colored("Current:", "cyan"),
+            colored("Current theme:", "cyan"),
             colored(load_theme()["name"], "bright_green", bold=True),
         )
         print()
@@ -377,17 +393,27 @@ def themes_submenu():
                 f"   {colored(str(i), 'id', bold=True)}. {colored(t['name'], 'name')}"
             )
 
-        print(colored("\n   [number] Apply    [b] Back", "extra"))
+        print(colored("\n   [number] Select & Preview    [b] Back", "extra"))
         ch = input(colored("\n   Choice: ", "prompt")).strip().lower()
+
         if ch == "b":
             return
         try:
             idx = int(ch) - 1
             theme_key = list(AVAILABLE_THEMES.keys())[idx]
-            save_theme(theme_key)
-            input(colored("\nTheme changed. Press Enter...", "prompt"))
-        except:
-            print(colored("   ❌ Invalid", "red"))
+
+            # Show live preview
+            show_theme_preview(theme_key)
+
+            confirm = (
+                input(colored("\nApply this theme? (y/N): ", "prompt")).strip().lower()
+            )
+            if confirm == "y":
+                save_theme(theme_key)
+                print(colored("✅ Theme applied!", "bright_green"))
+            input(colored("\nPress Enter to continue...", "prompt"))
+        except Exception:
+            print(colored("   ❌ Invalid choice", "red"))
             input("   Press Enter...")
 
 
@@ -477,6 +503,7 @@ def load_menu():
                 )
         except Exception:
             pass
+    # Default rich menu
     return {
         "categories": {
             "System Update & Maintenance": {
@@ -570,7 +597,6 @@ def save_menu(menu):
         print(colored(f"❌ Save error: {e}", "red"))
 
 
-# ====================== CRUD Functions ======================
 def add_item(menu):
     print(colored("\nAvailable Categories:", "cyan"))
     cat_list = list(menu["categories"].keys())
