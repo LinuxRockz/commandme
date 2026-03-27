@@ -56,33 +56,18 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### 4. First run
+### 4. Then run commandme
 
 ```bash
 commandme
 ```
 
-The script will create `~/.linux_command_menu.json` (menu data) and `~/.linux_command_menu_config.json` (settings).
-
----
-
-## ⚙️ Configuration
-
-Edit the top of the script to set your update source:
-
-```python
-# Choose your platform
-UPDATE_PLATFORM = "github"        # or "gitea"
-
-GITHUB_RAW_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/commandme.py"
-GITEA_RAW_URL  = "https://git.yourdomain.com/YOUR_USERNAME/YOUR_REPO/raw/branch/main/commandme.py"
-```
-
-**Tip:** Use option `p` inside the menu to switch between GitHub and Gitea without editing the script.
-
 ---
 
 ## 📋 Changelog
+
+**v2.3.0**
+Adding Themes back in
 
 **v2.2.0**
 Complete version with One-Click Self-Updater via GitHub Gist
