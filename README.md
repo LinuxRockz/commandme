@@ -69,6 +69,9 @@ commandme
 * Updated gist URL + minor improvements
 
 
+**v2.3.5** (2026-03-27)
+* Updated gist URL + minor improvements
+
 **v2.3.1**
 Added the missing show_version() function back
 
