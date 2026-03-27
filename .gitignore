@@ -1,2 +1,5 @@
 .sublime-text-git-autocommit
-CommandMe.md
+docs
+ref
+.ruff_cache
+.pre-commit-config.yaml

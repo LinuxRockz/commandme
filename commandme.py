@@ -19,7 +19,7 @@ THEME_FILE = Path.home() / ".linux_command_menu_theme.json"
 # ==================== SELF-UPDATER CONFIG ====================
 # Replace with your own public Gist Raw URL after creating it
 GIST_RAW_URL = (
-    "https://gist.githubusercontent.com/YOUR_USERNAME/YOUR_GIST_ID/raw/commandme.py"
+    "https://gist.githubusercontent.com/LinuxRockz/943cfd94340f8b8289edfbdda5f227c6/raw/6a01880e1701962fca1c0481716578348a006ee7/commandme.py"
 )
 
 # ==================== THEMES ====================
