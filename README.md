@@ -65,6 +65,10 @@ commandme
 
 ## 📋 Changelog
 
+**v2.3.5** (2026-03-27)
+* Ruff-compliant + Dracula theme + Fixed Gist version check
+
+
 **v2.3.1**
 Added the missing show_version() function back
 
